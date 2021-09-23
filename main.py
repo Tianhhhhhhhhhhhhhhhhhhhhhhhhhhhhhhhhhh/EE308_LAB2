@@ -8,10 +8,13 @@ completionLevel = argv[2]
 keywords = ["auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern",
             "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static",
             "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"]
+
 keywordNum = 0
 switchNum = 0
 caseNum = []
 tempNum = 0
+ifElseNum = 0
+preElse = 0
 
 # Advanced  requirement implement
 with open(filePath, 'r') as f:
@@ -34,6 +37,14 @@ with open(filePath, 'r') as f:
                 caseNum.append(tempNum)
                 tempNum = 0
 
+            # count if-else
+            if word == "if":
+                preElse = 0
+            if preElse == 1:
+                ifElseNum += 1
+            if word == "else":
+                preElse = 1
+
 # Output
 if completionLevel == "1":
     print("total num:", keywordNum)
@@ -45,7 +56,13 @@ elif completionLevel == "2":
         output += str(i) + " "
     print("case num:", output)
 elif completionLevel == "3":
-    print("Coming soon")
+    print("total num:", keywordNum)
+    print("switch num:", switchNum)
+    output = ""
+    for i in caseNum:
+        output += str(i) + " "
+    print("case num:", output)
+    print("if-else num:", ifElseNum)
 elif completionLevel == "4":
     print("Coming soon")
 else:
