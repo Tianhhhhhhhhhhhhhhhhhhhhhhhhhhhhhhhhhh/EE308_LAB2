@@ -40,30 +40,6 @@
 
 ## 3. Design and implementation process
 
-```mermaid
-flowchart LR;
-A(Read from C file and Process);
-B{If find keyword};
-C{If find 'switch'};
-D{If find 'else'};
-E(Count 'case' num until find 'default');
-F{If next word is 'if'};
-G(It has 'else if');
-H('if-else' num added);
-I('if-elseif-else' num added);
-J{If it has 'else if'}
-K(Keyword num added)
-A-->B;
-B-->K;
-B-->C;
-C-->E;
-C-->D;
-D-->F-->|Yes|G;
-F-->|No|J;
-J-->|Yes|I;
-J-->|No|H;
-```
-
 
 
 ## 4. Code description
