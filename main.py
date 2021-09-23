@@ -14,9 +14,11 @@ switchNum = 0
 caseNum = []
 tempNum = 0
 ifElseNum = 0
+ifElseifElseNum = 0
 preElse = 0
+preElseIf = 0
 
-# Advanced  requirement implement
+# Ultimate requirement implement
 with open(filePath, 'r') as f:
     lines = f.readlines()
     for line in lines:
@@ -37,11 +39,17 @@ with open(filePath, 'r') as f:
                 caseNum.append(tempNum)
                 tempNum = 0
 
-            # count if-else
+            # count if-else and if-elseif-else
             if word == "if":
-                preElse = 0
+                if preElse == 1:
+                    preElseIf += 1
+                    preElse = 0
             if preElse == 1:
-                ifElseNum += 1
+                if preElseIf != 0:
+                    ifElseifElseNum += 1
+                    preElseIf -= 1
+                else:
+                    ifElseNum += 1
                 preElse = 0
             if word == "else":
                 preElse = 1
@@ -65,6 +73,13 @@ elif completionLevel == "3":
     print("case num:", output)
     print("if-else num:", ifElseNum)
 elif completionLevel == "4":
-    print("Coming soon")
+    print("total num:", keywordNum)
+    print("switch num:", switchNum)
+    output = ""
+    for i in caseNum:
+        output += str(i) + " "
+    print("case num:", output)
+    print("if-else num:", ifElseNum)
+    print("if-elseif-else num:", ifElseifElseNum)
 else:
     print("Input the completion level between 1~4")
