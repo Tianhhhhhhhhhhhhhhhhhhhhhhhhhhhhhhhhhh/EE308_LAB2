@@ -20,8 +20,8 @@ preElse = 0
 with open(filePath, 'r') as f:
     lines = f.readlines()
     for line in lines:
-        line = line.replace("(", " ").replace(")", " ").replace("{", " ") \
-            .replace("}", " ").replace(";", " ").replace(":", " ")
+        line = line.replace("(", " ( ").replace(")", " ) ").replace(";", " ; ") \
+            .replace("{", " { ").replace("}", " } ").replace(":", " : ")
         words = line.split()
         for word in words:
             # count keywords
@@ -42,6 +42,7 @@ with open(filePath, 'r') as f:
                 preElse = 0
             if preElse == 1:
                 ifElseNum += 1
+                preElse = 0
             if word == "else":
                 preElse = 1
 
