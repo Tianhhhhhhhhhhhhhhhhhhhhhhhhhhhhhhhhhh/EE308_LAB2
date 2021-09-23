@@ -17,12 +17,8 @@ tempNum = 0
 with open(filePath, 'r') as f:
     lines = f.readlines()
     for line in lines:
-        line = line.replace("(", " ")
-        line = line.replace(")", " ")
-        line = line.replace(";", " ")
-        line = line.replace("{", " ")
-        line = line.replace("}", " ")
-        line = line.replace(":", " ")
+        line = line.replace("(", " ").replace(")", " ").replace("{", " ") \
+            .replace("}", " ").replace(";", " ").replace(":", " ")
         words = line.split()
         for word in words:
             # count keywords
@@ -40,11 +36,14 @@ with open(filePath, 'r') as f:
 
 # Output
 if completionLevel == "1":
-    print("total num: ", keywordNum)
+    print("total num:", keywordNum)
 elif completionLevel == "2":
-    print("total num: ", keywordNum)
-    print("switch num: ", switchNum)
-    print("case num: ", caseNum)
+    print("total num:", keywordNum)
+    print("switch num:", switchNum)
+    output = ""
+    for i in caseNum:
+        output += str(i) + " "
+    print("case num:", output)
 elif completionLevel == "3":
     print("Coming soon")
 elif completionLevel == "4":
