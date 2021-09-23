@@ -17,6 +17,7 @@ ifElseNum = 0
 ifElseifElseNum = 0
 preElse = 0
 preElseIf = 0
+elseIfNum = 0
 
 # Ultimate requirement implement
 with open(filePath, 'r') as f:
@@ -42,12 +43,16 @@ with open(filePath, 'r') as f:
             # count if-else and if-elseif-else
             if word == "if":
                 if preElse == 1:
-                    preElseIf += 1
+                    if preElseIf == 0:
+                        preElseIf = 1
+                        elseIfNum += 1
                     preElse = 0
+                else:
+                    preElseIf = 0
             if preElse == 1:
-                if preElseIf != 0:
+                if elseIfNum != 0:
                     ifElseifElseNum += 1
-                    preElseIf -= 1
+                    elseIfNum -= 1
                 else:
                     ifElseNum += 1
                 preElse = 0
